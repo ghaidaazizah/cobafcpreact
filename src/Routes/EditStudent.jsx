@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, Input } from '@chakra-ui/react'
+import { Button, Input } from "@chakra-ui/react";
 import Footer from "../components/Footer";
+import NavBar from "../components/Navbar";
 
 function EditStudent() {
   const { id } = useParams();
@@ -67,74 +68,68 @@ function EditStudent() {
     navigate("/student"); // Kembali ke halaman student setelah edit
   };
 
-  if (!student) return <p>Loading ...</p>;
+  // if (!student) return <p>Loading ...</p>;
 
   return (
     <>
-    <div>
-      <h1>Edit Student</h1>
-      <form onSubmit={handleSubmit} data-testid='form-student'>
+      <NavBar />
+      {!student ? (
+        <p>Loading ...</p>
+      ) : (
         <div>
-          <img src={student.profilePicture} alt='' />
-          <label>
-            Fullname:
-            <Input type='text' name='fullname' value={formData.fullname} onChange={handleChange} data-testid='name' required />
-          </label>
+          <h1>Edit Student</h1>
+          <form onSubmit={handleSubmit} data-testid='form-student'>
+            <div>
+              <img src={student.profilePicture} alt='' />
+              <label>Fullname:</label>
+              <Input type='text' name='fullname' value={formData.fullname} onChange={handleChange} data-testid='name' required />
+            </div>
+            <div>
+              <label>Address:</label>
+              <Input type='text' name='address' value={formData.address} onChange={handleChange} data-testid='address' required />
+            </div>
+            <div>
+              <label>Phone Number:</label>
+              <Input type='text' name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} data-testid='phoneNumber' required />
+            </div>
+            <div>
+              <label>Birth Date:</label>
+              <Input type='date' name='birthDate' value={formData.birthDate} onChange={handleChange} data-testid='date' required />
+            </div>
+            <div>
+              <label>Gender:</label>
+              <select name='gender' value={formData.gender} onChange={handleChange} data-testid='gender' required>
+                <option value=''>Select Gender</option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+                <option value='Other'>Other</option>
+              </select>
+            </div>
+            <div>
+              <label>Program Study:</label>
+              <select name='programStudy' value={formData.programStudy} onChange={handleChange} data-testid='prody' required>
+                <option value=''>Select Program Study</option>
+                <option value='Ekonomi'>Ekonomi</option>
+                <option value='Manajemen'>Manajemen</option>
+                <option value='Akuntansi'>Akuntansi</option>
+                <option value='Administrasi Publik'>Administrasi Publik</option>
+                <option value='Administrasi Bisnis'>Administrasi Bisnis</option>
+                <option value='Hubungan Internasional'>Hubungan Internasional</option>
+                <option value='Teknik Sipil'>Teknik Sipil</option>
+                <option value='Arsitektur'>Arsitektur</option>
+                <option value='Matematika'>Matematika</option>
+                <option value='Fisika'>Fisika</option>
+                <option value='Informatika'>Informatika</option>
+              </select>
+            </div>
+            <Button type='submit' data-testid='edit-btn'>
+              Edit Student
+            </Button>
+          </form>
         </div>
-        <div>
-          <label>
-            Address:
-            <Input type='text' name='address' value={formData.address} onChange={handleChange} data-testid='address' required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Phone Number:
-            <Input type='text' name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} data-testid='phoneNumber' required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Birth Date:
-            <Input type='date' name='birthDate' value={formData.birthDate} onChange={handleChange} data-testid='date' required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Gender:
-            <select name='gender' value={formData.gender} onChange={handleChange} data-testid='gender' required>
-              <option value=''>Select Gender</option>
-              <option value='Male'>Male</option>
-              <option value='Female'>Female</option>
-              <option value='Other'>Other</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Program Study:
-            <select name='programStudy' value={formData.programStudy} onChange={handleChange} data-testid='prody' required>
-              <option value=''>Select Program Study</option>
-              <option value='Ekonomi'>Ekonomi</option>
-              <option value='Manajemen'>Manajemen</option>
-              <option value='Akuntansi'>Akuntansi</option>
-              <option value='Administrasi Publik'>Administrasi Publik</option>
-              <option value='Administrasi Bisnis'>Administrasi Bisnis</option>
-              <option value='Hubungan Internasional'>Hubungan Internasional</option>
-              <option value='Teknik Sipil'>Teknik Sipil</option>
-              <option value='Arsitektur'>Arsitektur</option>
-              <option value='Matematika'>Matematika</option>
-              <option value='Fisika'>Fisika</option>
-              <option value='Informatika'>Informatika</option>
-            </select>
-          </label>
-        </div>
-        <Button type='submit' data-testid='edit-btn'>
-          Edit Student
-        </Button>
-      </form>
-    </div>
-    <Footer />
+      )}
+
+      <Footer />
     </>
   );
 }

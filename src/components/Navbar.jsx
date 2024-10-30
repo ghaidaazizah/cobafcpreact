@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Header, H1, Section, Button } from "@chakra-ui/react"
+import { Box, Text, Flex, Link } from "@chakra-ui/react";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -17,19 +17,19 @@ const NavBar = () => {
   };
 
   return (
-    <Header>
-      <H1 onClick={() => handleNavigation("/")} data-testid='home-page'>
+    <Box>
+      <Text onClick={() => handleNavigation("/")} data-testid='home-page'>
         Student Portal
-      </H1> 
-      <Section>
-        <Button onClick={() => handleNavigation("/student")} data-testid='student-page'>
+      </Text>
+      <Flex>
+        <Link onClick={() => handleNavigation("/student")} data-testid='student-page'>
           All Student
-        </Button>
-        <Button onClick={() => handleNavigation("/add")} data-testid='add-page'>
+        </Link>
+        <Link onClick={() => handleNavigation("/add")} data-testid='add-page'>
           Add Student
-        </Button>
-      </Section>
-    </Header>
+        </Link>
+      </Flex>
+    </Box>
   );
 };
 
